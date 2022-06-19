@@ -14,7 +14,7 @@ echo "root hard     nofile         100000" >>/etc/security/limits.conf
 echo "session required pam_limits.so" >>/etc/pam.d/common-session
 ulimit -n
 
-npm install pm2
+npm install pm2 -g
 apt install git -y
 git clone https://github.com/SpiritedAwayLab/noderun.git
 cd noderun
