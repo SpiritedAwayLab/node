@@ -15,3 +15,18 @@ echo "session required pam_limits.so" >>/etc/pam.d/common-session
 ulimit -n
 
 npm install pm2
+apt install git -y
+git clone https://github.com/SpiritedAwayLab/noderun.git
+cd noderun
+npm i
+
+cd /root
+wget -o deploy.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/deploy.sh
+chmod a+x deploy.sh
+wget -o runnode.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/runnode.sh
+chmoa a+x runnode.sh
+
+./deploy.sh
+cd noderun
+node register.js
+pm2 -n maintance start maintance.js
