@@ -1,0 +1,17 @@
+#nginx
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+nvm install v14
+
+echo "fs.file-max = 100000" >>/etc/sysctl.conf
+sudo sysctl -p
+echo "root soft     nproc          100000" >>/etc/security/limits.conf
+echo "root hard     nproc          100000" >>/etc/security/limits.conf
+echo "root soft     nofile         100000" >>/etc/security/limits.conf
+echo "root hard     nofile         100000" >>/etc/security/limits.conf
+echo "session required pam_limits.so" >>/etc/pam.d/common-session
+ulimit -n
+
+npm install pm2
