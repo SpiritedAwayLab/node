@@ -27,7 +27,7 @@ chmod a+x deploy.sh
 wget -O runnode.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/runnode.sh
 chmod a+x runnode.sh
 
-wget -O runnode.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/register.sh
+wget -O register.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/register.sh
 chmod a+x register.sh
 
 ./deploy.sh
