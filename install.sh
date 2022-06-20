@@ -23,8 +23,12 @@ npm i
 cd /root
 wget -O deploy.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/deploy.sh
 chmod a+x deploy.sh
+
 wget -O runnode.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/runnode.sh
 chmod a+x runnode.sh
+
+wget -O runnode.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/register.sh
+chmod a+x register.sh
 
 ./deploy.sh
 cd noderun
