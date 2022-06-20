@@ -10,4 +10,5 @@ cat >/etc/systemd/system/forta.service.d/env.conf <<EOF
 Environment="FORTA_DIR=/root/.forta"
 Environment="FORTA_PASSPHRASE=5XkngQR8geRTobBj"
 EOF
+sudo systemctl daemon-reload
 sudo systemctl start forta

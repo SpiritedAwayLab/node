@@ -24,7 +24,7 @@ cd /root
 wget -O deploy.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/deploy.sh
 chmod a+x deploy.sh
 wget -O runnode.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/runnode.sh
-chmoa a+x runnode.sh
+chmod a+x runnode.sh
 
 ./deploy.sh
 cd noderun
