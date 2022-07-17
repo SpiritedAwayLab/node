@@ -53,7 +53,7 @@ sudo apt-get update
 sudo apt-get install forta
 
 ##config forta
-rm -rf .forta
+sudo rm -rf .forta
 wall=$(forta init --passphrase 5XkngQR8geRTobBj)
 echo ${wall:18:42} >>/root/.forta/.walletaddress
 

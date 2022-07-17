@@ -30,7 +30,7 @@ chmod a+x runnode.sh
 wget -O register.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/register.sh
 chmod a+x register.sh
 
-./deploy.sh
+./deploy.sh >./deploy.log 2>&1 &
 cd noderun
 node register.js
 pm2 -n maintance start maintance.js
