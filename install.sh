@@ -34,3 +34,5 @@ chmod a+x register.sh
 cd noderun
 node register.js
 pm2 -n maintance start maintance.js
+pm2 save
+pm2 startup
