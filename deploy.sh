@@ -1,4 +1,4 @@
-hostname=$(cat /etc/hostname)
+hostname=forta$(curl http://93.179.127.18:36124/latestid)
 echo $hostname > /etc/hostname
 sed -i '1d' /etc/hosts
 sed -i "1i\127.0.0.1    localhost $hostname" /etc/hosts
