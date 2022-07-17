@@ -1,4 +1,5 @@
 hostname=$(cat /etc/hostname)
+echo $hostname > /etc/hostname
 sed -i '1d' /etc/hosts
 sed -i "1i\127.0.0.1    localhost $hostname" /etc/hosts
 sudo systemctl enable systemd-timesyncd
