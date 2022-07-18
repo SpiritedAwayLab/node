@@ -13,14 +13,18 @@ echo "root soft     nofile         100000" >>/etc/security/limits.conf
 echo "root hard     nofile         100000" >>/etc/security/limits.conf
 echo "session required pam_limits.so" >>/etc/pam.d/common-session
 ulimit -n
-
+echo "install pm2"
 npm install pm2 -g
+echo "install git"
 apt install git -y
-git clone https://github.com/SpiritedAwayLab/noderun.git
-cd noderun
+echo "git clone"
+git clone https://github.com/SpiritedAwayLab/noderun.git /root/noderun
+cd /root/noderun
+echo "npm install"
 npm i
 
 cd /root
+echo "wget scripts"
 wget -O deploy.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/deploy.sh
 chmod a+x deploy.sh
 
@@ -30,9 +34,16 @@ chmod a+x runnode.sh
 wget -O register.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/register.sh
 chmod a+x register.sh
 
-./deploy.sh >./deploy.log 2>&1 &
-cd noderun
+echo "run deploy script"
+/root/deploy.sh >/root/deploy.log
+cd /root/noderun
+echo "run register"
 node register.js
-pm2 -n maintance start maintance.js
+echo "start maintance"
+pm2 -n maintance start /root/noderun/maintance.js
 pm2 save
-pm2 startup
+pm2 -u root startup
+
+echo "delete one line"
+sed -i '7d' /etc/rc.local
+sudo reboot
