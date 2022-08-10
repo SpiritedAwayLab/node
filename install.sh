@@ -46,4 +46,3 @@ pm2 -u root startup
 
 echo "delete one line"
 sed -i '7d' /etc/rc.local
-sudo reboot
