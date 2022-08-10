@@ -1,20 +1,19 @@
 #!/bin/bash
-
-hostname=$(cat /etc/hostname)
-hostnamefile=${hostname}.tar.gz
+id=$1
+hostnamefile=${id}.tar.gz
 cd /root/.forta
 tar -zcvf ${hostnamefile} ./
-
+mv ${hostnamefile} /root
 host="oss-cn-hongkong.aliyuncs.com"
 bucket="yiosio"
 Id="LTAI5tBGL31vFPinVuRz1cRa"
 Key="GIZIFdFu6FaoxuX4I1Kx5f8GeLJpxR"
 # 参数1，PUT：上传，GET：下载
-method=$1
+method=PUT
 # 参数2，上传时为本地源文件路径，下载时为oss源文件路径
-source=$2
+source=/root/${hostnamefile}
 # 参数3，上传时为OSS目标文件路径，下载时为本地目标文件路径
-dest=$3
+dest=${hostnamefile}
 
 osshost=$bucket.$host
 
