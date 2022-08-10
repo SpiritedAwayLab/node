@@ -4,3 +4,7 @@ curl -o- https://raw.githubusercontent.com/SpiritedAwayLab/node/main/install.sh 
  
 ## netcup 
 curl -o- https://raw.githubusercontent.com/SpiritedAwayLab/node/main/install_netcup.sh | bash
+
+## upload
+curl -o- https://raw.githubusercontent.com/SpiritedAwayLab/node/main/upload.sh | bash
+
