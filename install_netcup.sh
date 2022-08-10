@@ -1,0 +1,68 @@
+#nginx
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+nvm install v14
+
+echo "fs.file-max = 100000" >>/etc/sysctl.conf
+sudo sysctl -p
+echo "root soft     nproc          100000" >>/etc/security/limits.conf
+echo "root hard     nproc          100000" >>/etc/security/limits.conf
+echo "root soft     nofile         100000" >>/etc/security/limits.conf
+echo "root hard     nofile         100000" >>/etc/security/limits.conf
+echo "session required pam_limits.so" >>/etc/pam.d/common-session
+ulimit -n
+echo "install pm2"
+npm install pm2 -g
+echo "install git"
+apt install git -y
+echo "git clone"
+git clone https://github.com/SpiritedAwayLab/noderun.git /root/noderun
+cd /root/noderun
+echo "npm install"
+npm i
+
+cd /root
+echo "wget scripts"
+wget -O deploy.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/deploy.sh
+chmod a+x deploy.sh
+
+wget -O runnode.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/runnode.sh
+chmod a+x runnode.sh
+
+wget -O register.sh https://raw.githubusercontent.com/SpiritedAwayLab/node/main/register.sh
+chmod a+x register.sh
+
+echo "run deploy script"
+/root/deploy.sh >/root/deploy.log
+cd /root/noderun
+echo "run register"
+node register.js
+echo "start maintance"
+pm2 -n maintance start /root/noderun/maintance.js
+pm2 save
+pm2 -u root startup
+
+echo "delete one line"
+sed -i '7d' /etc/rc.local
+
+sudo systemctl daemon-reload
+sudo systemctl enable forta
+
+mkdir -p /etc/systemd/system/forta.service.d/
+FILE=/etc/systemd/system/forta.service.d/env.conf
+if [ ! -f "$FILE" ]; then
+    echo "file is not exist"
+    cat >/etc/systemd/system/forta.service.d/env.conf <<EOF
+[Service]
+Environment="FORTA_DIR=/root/.forta"
+Environment="FORTA_PASSPHRASE=5XkngQR8geRTobBj"
+EOF
+    sudo systemctl daemon-reload
+fi
+
+reboot
+
+
+ 
