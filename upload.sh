@@ -6,8 +6,8 @@ tar -zcvf ${hostnamefile} ./
 mv ${hostnamefile} /root
 host="oss-cn-hongkong.aliyuncs.com"
 bucket="yiosio"
-Id="LTAI5tBGL31vFPinVuRz1cRa"
-Key="GIZIFdFu6FaoxuX4I1Kx5f8GeLJpxR"
+Id="LTAI5tMwzaWe2h6gxqHEKw6k"
+Key="V1vV6E3P39ZWdIcVDWu0UEAfbf8xZt"
 # 参数1，PUT：上传，GET：下载
 method=PUT
 # 参数2，上传时为本地源文件路径，下载时为oss源文件路径
@@ -57,11 +57,11 @@ if [ "${method}"x = "PUT"x ]; then
     url=http://${osshost}/${dest}
     echo "upload ${source} to ${url}"
     curl -i -q -X PUT -T "${source}" \
-        -H "Host: ${osshost}" \
-        -H "Date: ${dateValue}" \
-        -H "Content-Type: ${contentType}" \
-        -H "Authorization: OSS ${Id}:${signature}" \
-        ${url}
+    -H "Host: ${osshost}" \
+    -H "Date: ${dateValue}" \
+    -H "Content-Type: ${contentType}" \
+    -H "Authorization: OSS ${Id}:${signature}" \
+    ${url}
 else
     resource="/${bucket}/${source}"
     contentType=""
@@ -71,9 +71,9 @@ else
     url=http://${osshost}/${source}
     echo "download ${url} to ${dest}"
     curl --create-dirs \
-        -H "Host: ${osshost}" \
-        -H "Date: ${dateValue}" \
-        -H "Content-Type: ${contentType}" \
-        -H "Authorization: OSS ${Id}:${signature}" \
-        ${url} -o ${dest}
+    -H "Host: ${osshost}" \
+    -H "Date: ${dateValue}" \
+    -H "Content-Type: ${contentType}" \
+    -H "Authorization: OSS ${Id}:${signature}" \
+    ${url} -o ${dest}
 fi
