@@ -6,6 +6,7 @@ curl -o- https://raw.githubusercontent.com/SpiritedAwayLab/node/main/install.sh 
 curl -o- https://raw.githubusercontent.com/SpiritedAwayLab/node/main/install_netcup.sh | bash
 
 ## upload
- wget curl -o- https://raw.githubusercontent.com/SpiritedAwayLab/node/main/upload.sh & bash upload.sh 
+ wget -o- https://raw.githubusercontent.com/SpiritedAwayLab/node/main/upload.sh && bash upload.sh 
 
-
+## download
+ wget -o- https://raw.githubusercontent.com/SpiritedAwayLab/node/main/download.sh && bash download.sh  
